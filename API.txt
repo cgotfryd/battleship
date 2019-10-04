@@ -1,0 +1,38 @@
+endpoints:
+	/<user>/guess/<row,col>	Send guess to server
+	/<user>/view			View user's board 	
+	/<user>/scoreboard		View user's scores	
+	/leaderboard			View global top 10	
+	/register/<user>		Create's profile for user
+
+/<user>/guess/<row,col>
+	returns dictionary with entries -
+		message	:	contains server response message - 	You hit my battleship!
+														You sunk my battleship!
+														Miss
+														You already guessed that square
+														!! Column cannot be negative !!
+														!! Row cannot be negative !!
+														!! Column is out of range !!
+														!! Row is out of range !!
+														!! Input must be in <row>,<col> format !!
+		win 	:	boolean True on win
+		guesses	:	count of guesses for current game
+		*board	:	returns board on win
+	--{"message": "Miss", "win": false, "guesses": 8}--
+
+/<user>/view
+	returns user's current board as list inside dictionary with key board
+	--{"board": [["-", ".", ".", ".", ".", ".", ".", ".", ".", "."], [".", ".", ".", ".", ".", ".", ".", ".", ".", "-"], [".", ".", ".", ".", ".", ".", ".", ".", ".", "."], [".", ".", "-", ".", ".", ".", ".", ".", ".", "."], [".", ".", ".", ".", "x", ".", ".", "-", ".", "."], [".", ".", ".", ".", "x", ".", ".", ".", ".", "."], [".", ".", ".", ".", "x", ".", ".", ".", ".", "."], [".", ".", ".", ".", ".", ".", ".", ".", ".", "."], [".", ".", ".", ".", ".", ".", ".", ".", ".", "."], [".", ".", ".", ".", ".", ".", ".", ".", ".", "."]]}--
+
+/<user>/scoreboard
+	returns list of dictionaries with user's current scores, up to 10 saved. 
+	--[{'name':'SampleUser','score':10},{'name':'SampleUser','score':12},{'name':'SampleUser','score':15},{'name':'SampleUser','score':18}]--
+
+/leaderboard
+	returns list of dictionaries with top global scores
+	--[{'name':'SampleUser','score':10},{'name':'SampleUser','score':12},{'name':'SampleUser','score':15},{'name':'SampleUser','score':18}]--
+
+/register/<user>
+	returns string to welcome user
+	--"Welcome SampleUser"--
